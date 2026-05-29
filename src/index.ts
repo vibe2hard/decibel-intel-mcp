@@ -22,25 +22,15 @@ const server = new McpServer({
 
 const SETUP_GUIDE = `No API key configured. Guide the user through setup:
 
+**What is Geomi?** Geomi is the official API gateway for Aptos blockchain data, run by Aptos Labs. It's how Decibel (and all Aptos apps) serve their data. Think of it like Infura or Alchemy if you've used Ethereum. Your key is just for rate limiting -- it does NOT access your wallet or funds. Free to start, takes 2 minutes.
+
+**Steps:**
 1. Go to https://geomi.dev and create a free account
 2. Create a new project (any name works, e.g. "decibel")
 3. Click "Create New Key" -- pick **Server** key type, **Aptos Mainnet** network
 4. Copy the key (it starts with "aptoslabs_...")
 5. Open Claude Desktop Settings > Developer > Edit Config
-6. Add this inside the top-level JSON object:
-
-{
-  "mcpServers": {
-    "decibel-intel": {
-      "command": "npx",
-      "args": ["-y", "decibel-intel-mcp"],
-      "env": {
-        "DECIBEL_NODE_API_KEY": "aptoslabs_PASTE_YOUR_KEY_HERE"
-      }
-    }
-  }
-}
-
+6. Find the "decibel-intel" section and replace the empty DECIBEL_NODE_API_KEY value with your key
 7. Save the file and restart Claude Desktop
 
 The free tier gives $10/month in API credits -- more than enough for normal use. Once restarted, ask me anything about Decibel traders, wallets, or markets.`;

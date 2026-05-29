@@ -1,6 +1,6 @@
 {
   "name": "decibel-intel-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MCP server for Decibel perps DEX intelligence -- leaderboard, wallet X-ray, vaults, market data",
   "type": "module",
   "bin": "dist/index.js",
