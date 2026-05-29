@@ -19,18 +19,11 @@ Once connected, just ask in natural language:
 
 Decibel's official MCP only shows your own account. This server queries **any wallet** -- the leaderboard, trade history, positions, vaults -- using Decibel's public REST API. It's the research and intelligence layer.
 
-## Setup (3 minutes)
+## Setup (2 minutes)
 
-### 1. Get a Geomi API key (free)
+### 1. Add to your AI assistant
 
-All Decibel API calls require a [Geomi](https://geomi.dev) Node API key. Free tier gives you $10/month in credits -- more than enough for normal usage.
-
-1. Go to [geomi.dev](https://geomi.dev) and sign up
-2. Create a new project
-3. Create a **Node API** key for **Aptos Mainnet**
-4. Copy the key (starts with `aptoslabs_...`)
-
-### 2. Add to your AI assistant
+You don't need an API key to install. Add the config, and Claude will walk you through getting a key when you first use it.
 
 #### Claude Desktop
 
@@ -43,14 +36,16 @@ Open **Settings > Developer > Edit Config** and add:
       "command": "npx",
       "args": ["-y", "decibel-intel-mcp"],
       "env": {
-        "DECIBEL_NODE_API_KEY": "aptoslabs_YOUR_KEY_HERE"
+        "DECIBEL_NODE_API_KEY": ""
       }
     }
   }
 }
 ```
 
-Restart Claude Desktop. Done.
+Restart Claude Desktop. Ask "Who are the top traders on Decibel?" and Claude will guide you through the free API key setup.
+
+> **Already have a Geomi key?** Paste it into `DECIBEL_NODE_API_KEY` above and you're done.
 
 #### Claude Code
 

@@ -5,10 +5,14 @@
 
 const BASE_URL = "https://api.mainnet.aptoslabs.com/decibel/api/v1";
 
-let apiKey: string;
+let apiKey: string | null = null;
 
 export function initApi(key: string) {
   apiKey = key;
+}
+
+export function isConfigured(): boolean {
+  return apiKey !== null;
 }
 
 async function get<T>(path: string, params?: Record<string, string | number | boolean | undefined>): Promise<T> {

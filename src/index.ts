@@ -5,6 +5,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import {
   initApi,
+  isConfigured,
   getLeaderboard,
   getSubaccounts,
   getWalletPositions,
@@ -19,6 +20,37 @@ const server = new McpServer({
   version: "0.1.0",
 });
 
+const SETUP_GUIDE = `No API key configured. Guide the user through setup:
+
+1. Go to https://geomi.dev and create a free account
+2. Create a new project (any name works, e.g. "decibel")
+3. Click "Create New Key" -- pick **Server** key type, **Aptos Mainnet** network
+4. Copy the key (it starts with "aptoslabs_...")
+5. Open Claude Desktop Settings > Developer > Edit Config
+6. Add this inside the top-level JSON object:
+
+{
+  "mcpServers": {
+    "decibel-intel": {
+      "command": "npx",
+      "args": ["-y", "decibel-intel-mcp"],
+      "env": {
+        "DECIBEL_NODE_API_KEY": "aptoslabs_PASTE_YOUR_KEY_HERE"
+      }
+    }
+  }
+}
+
+7. Save the file and restart Claude Desktop
+
+The free tier gives $10/month in API credits -- more than enough for normal use. Once restarted, ask me anything about Decibel traders, wallets, or markets.`;
+
+type ToolResult = { content: Array<{ type: "text"; text: string }> };
+
+function needsKey(): ToolResult {
+  return { content: [{ type: "text", text: SETUP_GUIDE }] };
+}
+
 // ---------------------------------------------------------------------------
 // Tools
 // ---------------------------------------------------------------------------
@@ -31,6 +63,7 @@ server.tool(
     limit: z.number().min(1).max(1000).default(10).describe("Number of results"),
   },
   async ({ sort_by, limit }) => {
+    if (!isConfigured()) return needsKey();
     const data = await getLeaderboard(sort_by, limit);
     return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
   }
@@ -43,6 +76,7 @@ server.tool(
     address: z.string().describe("Wallet address (owner or subaccount)"),
   },
   async ({ address }) => {
+    if (!isConfigured()) return needsKey();
     const data = await getWalletPositions(address);
     if (data.length === 0) {
       return { content: [{ type: "text", text: "No open positions found for this address." }] };
@@ -59,6 +93,7 @@ server.tool(
     lookback_days: z.number().default(90).describe("Performance lookback period in days"),
   },
   async ({ address, lookback_days }) => {
+    if (!isConfigured()) return needsKey();
     const data = await getWalletOverview(address, lookback_days);
     return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
   }
@@ -74,6 +109,7 @@ server.tool(
     limit: z.number().min(1).max(200).default(50).describe("Number of trades to return"),
   },
   async ({ address, market, side, limit }) => {
+    if (!isConfigured()) return needsKey();
     const data = await getWalletTrades(address, market, side, limit);
     if (data.length === 0) {
       return { content: [{ type: "text", text: "No trades found for this address." }] };
@@ -89,6 +125,7 @@ server.tool(
     owner: z.string().describe("Owner wallet address"),
   },
   async ({ owner }) => {
+    if (!isConfigured()) return needsKey();
     const data = await getSubaccounts(owner);
     if (data.length === 0) {
       return { content: [{ type: "text", text: "No subaccounts found. This address may itself be a subaccount, not an owner." }] };
@@ -105,6 +142,7 @@ server.tool(
     limit: z.number().min(1).max(100).default(20).describe("Number of vaults"),
   },
   async ({ sort_by, limit }) => {
+    if (!isConfigured()) return needsKey();
     const data = await getVaults(sort_by, limit);
     if (data.length === 0) {
       return { content: [{ type: "text", text: "No active vaults found." }] };
@@ -118,6 +156,7 @@ server.tool(
   "Get current prices, open interest, 24h volume, and price changes for all Decibel markets.",
   {},
   async () => {
+    if (!isConfigured()) return needsKey();
     const data = await getFundingRates();
     return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
   }
@@ -128,13 +167,9 @@ server.tool(
 // ---------------------------------------------------------------------------
 
 const key = process.env.DECIBEL_NODE_API_KEY;
-if (!key) {
-  console.error("Error: DECIBEL_NODE_API_KEY environment variable is required.");
-  console.error("Get your key at https://geomi.dev");
-  process.exit(1);
+if (key) {
+  initApi(key);
 }
-
-initApi(key);
 
 const transport = new StdioServerTransport();
 server.connect(transport);
