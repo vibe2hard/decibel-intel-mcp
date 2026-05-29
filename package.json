@@ -1,0 +1,43 @@
+{
+  "name": "decibel-intel-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for Decibel perps DEX intelligence -- leaderboard, wallet X-ray, vaults, market data",
+  "type": "module",
+  "bin": {
+    "decibel-intel-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "decibel",
+    "aptos",
+    "perps",
+    "defi",
+    "trading",
+    "ai",
+    "claude"
+  ],
+  "author": "vibe2hard",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vibe2hard/decibel-intel-mcp"
+  },
+  "homepage": "https://github.com/vibe2hard/decibel-intel-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^5.8.3"
+  }
+}
