@@ -20,20 +20,27 @@ const server = new McpServer({
   version: "0.1.0",
 });
 
-const SETUP_GUIDE = `No API key configured. Guide the user through setup:
+const SETUP_GUIDE = `Looks like this is your first time using Decibel Intel! To pull live data from Decibel, you need a Geomi API key. Let me walk you through it -- takes about 2 minutes.
 
-**What is Geomi?** Geomi is the official API gateway for Aptos blockchain data, run by Aptos Labs. It's how Decibel (and all Aptos apps) serve their data. Think of it like Infura or Alchemy if you've used Ethereum. Your key is just for rate limiting -- it does NOT access your wallet or funds. Free to start, takes 2 minutes.
+**What is Geomi?** Geomi is the official API gateway for Aptos (the blockchain Decibel runs on). It's made by Aptos Labs. Think of it as the data pipe that connects us to Decibel's live trading data. Your key is free and just controls rate limits -- it does NOT touch your wallet or funds. Totally safe.
 
-**Steps:**
-1. Go to https://geomi.dev and create a free account
-2. Create a new project (any name works, e.g. "decibel")
-3. Click "Create New Key" -- pick **Server** key type, **Aptos Mainnet** network
-4. Copy the key (it starts with "aptoslabs_...")
-5. Open Claude Desktop Settings > Developer > Edit Config
-6. Find the "decibel-intel" section and replace the empty DECIBEL_NODE_API_KEY value with your key
-7. Save the file and restart Claude Desktop
+**Let's get your key:**
 
-The free tier gives $10/month in API credits -- more than enough for normal use. Once restarted, ask me anything about Decibel traders, wallets, or markets.`;
+1. Open https://geomi.dev in your browser
+2. Create a free account (email + password)
+3. Once you're in, click **"Create New Project"** -- name it anything you want (e.g. "decibel")
+4. Inside your project, click **"Create New Key"**
+5. For key type, pick **Server**. For network, pick **Aptos Mainnet**
+6. Your key will appear -- it starts with \`aptoslabs_\`. Copy it
+
+**Now add it to Claude Desktop:**
+
+1. Go to **Claude Desktop > Settings > Developer > Edit Config**
+2. You'll see a JSON file. Find the \`"decibel-intel"\` section
+3. Paste your key where it says \`DECIBEL_NODE_API_KEY\`
+4. Save the file and **restart Claude Desktop**
+
+That's it! After restarting, come back and ask me anything -- top traders, any wallet's positions, vaults, market data. I've got it all.`;
 
 type ToolResult = { content: Array<{ type: "text"; text: string }> };
 

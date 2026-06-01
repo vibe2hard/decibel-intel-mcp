@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "decibel-intel",
   "display_name": "Decibel Intel",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Look up any wallet, leaderboard, vaults, and market data on Decibel -- the perps DEX on Aptos.",
   "long_description": "Decibel Intel gives you research tools for the Decibel perpetuals DEX on Aptos. Look up any trader's positions, P&L, and trade history. Browse the leaderboard. Explore public vaults. Check market data across all pairs. Requires a free Geomi API key (takes 2 minutes to get).",
   "author": {
