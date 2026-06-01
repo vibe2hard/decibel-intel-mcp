@@ -56,6 +56,10 @@
     {
       "name": "get_funding_rates",
       "description": "Get prices, open interest, and volume for all Decibel markets"
+    },
+    {
+      "name": "set_api_key",
+      "description": "Save a Geomi API key so Decibel Intel can pull live data"
     }
   ],
   "user_config": {
