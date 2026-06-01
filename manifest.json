@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "decibel-intel",
   "display_name": "Decibel Intel",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Look up any wallet, leaderboard, vaults, and market data on Decibel -- the perps DEX on Aptos.",
   "long_description": "Decibel Intel gives you research tools for the Decibel perpetuals DEX on Aptos. Look up any trader's positions, P&L, and trade history. Browse the leaderboard. Explore public vaults. Check market data across all pairs. Requires a free Geomi API key (takes 2 minutes to get).",
   "author": {
@@ -61,10 +61,10 @@
   "user_config": {
     "api_key": {
       "type": "string",
-      "title": "Geomi API Key",
-      "description": "Your Geomi API key for Aptos Mainnet. Get one free at geomi.dev -- create an account, make a project, create a Server key for Aptos Mainnet. The key starts with 'aptoslabs_...' Free tier gives $10/month in credits.",
+      "title": "Geomi API Key (optional -- Claude will help you get one)",
+      "description": "Leave this blank for now. Once installed, ask Claude anything about Decibel and it will walk you through getting a free API key step by step.",
       "sensitive": true,
-      "required": true
+      "required": false
     }
   },
   "compatibility": {

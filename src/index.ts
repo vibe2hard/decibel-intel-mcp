@@ -156,7 +156,7 @@ server.tool(
 // Start
 // ---------------------------------------------------------------------------
 
-const key = process.env.DECIBEL_NODE_API_KEY;
+const key = process.env.DECIBEL_NODE_API_KEY?.trim();
 if (key) {
   initApi(key);
 }
