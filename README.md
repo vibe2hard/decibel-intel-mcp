@@ -21,7 +21,13 @@ Decibel's official MCP only shows your own account. This server queries **any wa
 
 ## Setup (2 minutes)
 
-### 1. Add to your AI assistant
+### Option A: One-click install (Claude Desktop)
+
+Download `decibel-intel.mcpb` from the [latest release](https://github.com/vibe2hard/decibel-intel-mcp/releases) and double-click it. Claude Desktop will prompt you for your Geomi API key -- no config files, no terminal.
+
+> **Need a Geomi key?** Create a free account at [geomi.dev](https://geomi.dev), make a project, and create a Server key for Aptos Mainnet. The key starts with `aptoslabs_...`. Free tier gives $10/month in credits.
+
+### Option B: Manual config (all platforms)
 
 You don't need an API key to install. Add the config, and Claude will walk you through getting a key when you first use it.
 

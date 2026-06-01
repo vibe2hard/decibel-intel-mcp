@@ -1,0 +1,76 @@
+{
+  "manifest_version": "0.3",
+  "name": "decibel-intel",
+  "display_name": "Decibel Intel",
+  "version": "0.1.3",
+  "description": "Look up any wallet, leaderboard, vaults, and market data on Decibel -- the perps DEX on Aptos.",
+  "long_description": "Decibel Intel gives you research tools for the Decibel perpetuals DEX on Aptos. Look up any trader's positions, P&L, and trade history. Browse the leaderboard. Explore public vaults. Check market data across all pairs. Requires a free Geomi API key (takes 2 minutes to get).",
+  "author": {
+    "name": "vibe2hard",
+    "url": "https://github.com/vibe2hard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vibe2hard/decibel-intel-mcp.git"
+  },
+  "homepage": "https://github.com/vibe2hard/decibel-intel-mcp",
+  "support": "https://github.com/vibe2hard/decibel-intel-mcp/issues",
+  "license": "MIT",
+  "keywords": ["decibel", "aptos", "perps", "defi", "trading", "crypto"],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "DECIBEL_NODE_API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "get_leaderboard",
+      "description": "Get top Decibel traders ranked by P&L, ROI, or volume"
+    },
+    {
+      "name": "get_wallet_positions",
+      "description": "Get any wallet's open positions on Decibel"
+    },
+    {
+      "name": "get_wallet_overview",
+      "description": "Get any wallet's trading performance on Decibel"
+    },
+    {
+      "name": "get_wallet_trades",
+      "description": "Get any wallet's trade history on Decibel"
+    },
+    {
+      "name": "get_subaccounts",
+      "description": "List all trading subaccounts under an owner wallet"
+    },
+    {
+      "name": "get_vaults",
+      "description": "Get all public Decibel vaults with TVL, APR, and performance"
+    },
+    {
+      "name": "get_funding_rates",
+      "description": "Get prices, open interest, and volume for all Decibel markets"
+    }
+  ],
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Geomi API Key",
+      "description": "Your Geomi API key for Aptos Mainnet. Get one free at geomi.dev -- create an account, make a project, create a Server key for Aptos Mainnet. The key starts with 'aptoslabs_...' Free tier gives $10/month in credits.",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}
