@@ -164,7 +164,7 @@ server.tool(
 // ---------------------------------------------------------------------------
 
 const key = process.env.DECIBEL_NODE_API_KEY?.trim();
-if (key) {
+if (key && key.startsWith("aptoslabs_")) {
   initApi(key);
 }
 
